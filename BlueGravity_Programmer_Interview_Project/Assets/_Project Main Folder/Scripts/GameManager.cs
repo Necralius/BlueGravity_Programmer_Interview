@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NekraliusDevelopmentStudio
 {
@@ -16,9 +16,27 @@ namespace NekraliusDevelopmentStudio
         private void Awake() => Instance = this;
         #endregion 
 
-        public AudioSource generalAudioSource;
+        public AudioSource effectsSource;
+        public AudioSource musicSource;
+        public AudioSource footstepsSource;
 
-        public void PlaySound(AudioClip clip) => generalAudioSource.PlayOneShot(clip);
-
+        public List<AudioClip> musics;
+        public void PlaySound(AudioClip clip) => effectsSource.PlayOneShot(clip);
+        public void PlayFootstepSound(AudioClip clip)
+        {
+            footstepsSource.volume = Random.Range(0.75f, 1f);
+            footstepsSource.pitch = Random.Range(0.85f, 1);
+            footstepsSource.PlayOneShot(clip);
+        }
+        public void MusicManagement()
+        {
+            if (musicSource.isPlaying) return;
+            else musicSource.PlayOneShot(musics[Random.Range(0, musics.Count)]);
+        }
+        private void Update()
+        {
+            if (InputManager.Instance.reloadSceneTrigger) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            MusicManagement();
+        }
     }
 }

@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "InventoryAct",
+                    "type": "Button",
+                    "id": "51acb86d-2dd9-4497-9eea-52a892e74972",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ReloadScene",
+                    "type": "Button",
+                    "id": "f33ff1c5-512d-4f92-9d43-88c7b8eeb2fc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -90,6 +108,28 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d15a12a-4fb0-4158-88ed-7a474fc4c7bb",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryAct",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3caeb62c-d1de-4ad2-840b-f7d6c596c9e3",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReloadScene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -110,6 +150,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "a5e86edc-1055-4ade-98dd-881286565790",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "InventoryAct",
+                    "type": "Button",
+                    "id": "3301e95c-a352-4059-ad70-f75a1317ffbe",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -180,6 +229,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "368bf76e-d823-4d35-ac50-721b4cb52c81",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InventoryAct",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

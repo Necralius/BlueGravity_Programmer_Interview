@@ -44,6 +44,24 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InventoryAct"",
+                    ""type"": ""Button"",
+                    ""id"": ""51acb86d-2dd9-4497-9eea-52a892e74972"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReloadScene"",
+                    ""type"": ""Button"",
+                    ""id"": ""f33ff1c5-512d-4f92-9d43-88c7b8eeb2fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -112,6 +130,28 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d15a12a-4fb0-4158-88ed-7a474fc4c7bb"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryAct"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3caeb62c-d1de-4ad2-840b-f7d6c596c9e3"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReloadScene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -132,6 +172,15 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""a5e86edc-1055-4ade-98dd-881286565790"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""InventoryAct"",
+                    ""type"": ""Button"",
+                    ""id"": ""3301e95c-a352-4059-ad70-f75a1317ffbe"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -204,6 +253,17 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""368bf76e-d823-4d35-ac50-721b4cb52c81"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryAct"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -214,10 +274,13 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
         m_PlayerKeyboard = asset.FindActionMap("PlayerKeyboard", throwIfNotFound: true);
         m_PlayerKeyboard_MoveAction = m_PlayerKeyboard.FindAction("MoveAction", throwIfNotFound: true);
         m_PlayerKeyboard_Interact = m_PlayerKeyboard.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerKeyboard_InventoryAct = m_PlayerKeyboard.FindAction("InventoryAct", throwIfNotFound: true);
+        m_PlayerKeyboard_ReloadScene = m_PlayerKeyboard.FindAction("ReloadScene", throwIfNotFound: true);
         // PlayerJoystick
         m_PlayerJoystick = asset.FindActionMap("PlayerJoystick", throwIfNotFound: true);
         m_PlayerJoystick_MoveAction = m_PlayerJoystick.FindAction("MoveAction", throwIfNotFound: true);
         m_PlayerJoystick_Interact = m_PlayerJoystick.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerJoystick_InventoryAct = m_PlayerJoystick.FindAction("InventoryAct", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,12 +342,16 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
     private IPlayerKeyboardActions m_PlayerKeyboardActionsCallbackInterface;
     private readonly InputAction m_PlayerKeyboard_MoveAction;
     private readonly InputAction m_PlayerKeyboard_Interact;
+    private readonly InputAction m_PlayerKeyboard_InventoryAct;
+    private readonly InputAction m_PlayerKeyboard_ReloadScene;
     public struct PlayerKeyboardActions
     {
         private @MainPlayerControl m_Wrapper;
         public PlayerKeyboardActions(@MainPlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveAction => m_Wrapper.m_PlayerKeyboard_MoveAction;
         public InputAction @Interact => m_Wrapper.m_PlayerKeyboard_Interact;
+        public InputAction @InventoryAct => m_Wrapper.m_PlayerKeyboard_InventoryAct;
+        public InputAction @ReloadScene => m_Wrapper.m_PlayerKeyboard_ReloadScene;
         public InputActionMap Get() { return m_Wrapper.m_PlayerKeyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -300,6 +367,12 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInteract;
+                @InventoryAct.started -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInventoryAct;
+                @InventoryAct.performed -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInventoryAct;
+                @InventoryAct.canceled -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnInventoryAct;
+                @ReloadScene.started -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnReloadScene;
+                @ReloadScene.performed -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnReloadScene;
+                @ReloadScene.canceled -= m_Wrapper.m_PlayerKeyboardActionsCallbackInterface.OnReloadScene;
             }
             m_Wrapper.m_PlayerKeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -310,6 +383,12 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @InventoryAct.started += instance.OnInventoryAct;
+                @InventoryAct.performed += instance.OnInventoryAct;
+                @InventoryAct.canceled += instance.OnInventoryAct;
+                @ReloadScene.started += instance.OnReloadScene;
+                @ReloadScene.performed += instance.OnReloadScene;
+                @ReloadScene.canceled += instance.OnReloadScene;
             }
         }
     }
@@ -320,12 +399,14 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
     private IPlayerJoystickActions m_PlayerJoystickActionsCallbackInterface;
     private readonly InputAction m_PlayerJoystick_MoveAction;
     private readonly InputAction m_PlayerJoystick_Interact;
+    private readonly InputAction m_PlayerJoystick_InventoryAct;
     public struct PlayerJoystickActions
     {
         private @MainPlayerControl m_Wrapper;
         public PlayerJoystickActions(@MainPlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveAction => m_Wrapper.m_PlayerJoystick_MoveAction;
         public InputAction @Interact => m_Wrapper.m_PlayerJoystick_Interact;
+        public InputAction @InventoryAct => m_Wrapper.m_PlayerJoystick_InventoryAct;
         public InputActionMap Get() { return m_Wrapper.m_PlayerJoystick; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -341,6 +422,9 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInteract;
+                @InventoryAct.started -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInventoryAct;
+                @InventoryAct.performed -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInventoryAct;
+                @InventoryAct.canceled -= m_Wrapper.m_PlayerJoystickActionsCallbackInterface.OnInventoryAct;
             }
             m_Wrapper.m_PlayerJoystickActionsCallbackInterface = instance;
             if (instance != null)
@@ -351,6 +435,9 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @InventoryAct.started += instance.OnInventoryAct;
+                @InventoryAct.performed += instance.OnInventoryAct;
+                @InventoryAct.canceled += instance.OnInventoryAct;
             }
         }
     }
@@ -359,10 +446,13 @@ public partial class @MainPlayerControl : IInputActionCollection2, IDisposable
     {
         void OnMoveAction(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInventoryAct(InputAction.CallbackContext context);
+        void OnReloadScene(InputAction.CallbackContext context);
     }
     public interface IPlayerJoystickActions
     {
         void OnMoveAction(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInventoryAct(InputAction.CallbackContext context);
     }
 }
